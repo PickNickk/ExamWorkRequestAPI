@@ -29,7 +29,6 @@ public class ReqResAPI {
         return user;
     }
     @Step("Выполняем post запрос на изменение имени, добавление работы. Проверка статуса кода, валидности key и value")
-    @Given("Запрос на замену имени {string},добавление работы {string}")
     public static void createUser(String name, String job) {
         Response changeUser = given()
                 .spec(requestSpec(URL))
@@ -44,5 +43,9 @@ public class ReqResAPI {
                 .body("createdAt",notNullValue())
                 .extract()
                 .response();
+    }
+    @Given("Запрос на смену имени и добавление работы")
+    public static void create(){
+        createUser(getProperty("userName"),getProperty("userJob"));
     }
 }
